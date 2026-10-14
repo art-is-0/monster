@@ -23,7 +23,7 @@ plt.rcParams.update(
         "lines.linewidth": 2,
         # Axes
         "axes.linewidth": 0.5,
-        "axes.grid": True,
+        #"axes.grid": True,
         "grid.color": "black",
         "grid.alpha": 0.25,
         "axes.labelpad": 2.0,

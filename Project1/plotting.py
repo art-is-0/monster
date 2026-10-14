@@ -60,11 +60,10 @@ def plot_classifier_comparison(results, name, show=False):
     on the best feature combination (by NN error) of that size.
     '''
     n_features = max(len(cols) for cols in results)
-    n_panels_per_row = 2
-    n_rows = (n_features + n_panels_per_row - 1) // n_panels_per_row
+    n_rows = n_features
 
-    fig, axes = plt.subplots(n_rows, n_panels_per_row,
-                             figsize=(12, 2.5 * n_rows),
+    fig, axes = plt.subplots(n_rows, 1,
+                             figsize=(6, 2.5 * n_rows),
                              sharex=True, squeeze=False)
     axes = axes.flatten()
 
@@ -82,14 +81,11 @@ def plot_classifier_comparison(results, name, show=False):
         bars = ax.barh(names, errors, color=colors)
         ax.set_title(f"d = {d}, features {", ".join(str(b + 1) for b in best)}")
         ax.set_xlabel("Error rate")
-        ax.grid(True, axis="x", linestyle="--", alpha=0.5)
+        ax.grid(True, axis="x", linestyle="--", alpha=0.3)
 
         ax.bar_label(bars, fmt="%.3f", padding=3, fontsize=10)
         ax.margins(x=0.1)
     
-    # Remove empty panels
-    for ax in axes[n_features:]:
-        fig.delaxes(ax)
     fig.tight_layout()
     fig.savefig(os.path.join(figure_path, f"{name}.pdf"))
     if show:
