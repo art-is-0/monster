@@ -8,7 +8,7 @@ from classifiers import (
                         nearest_neighbor, 
                         error_rate
                     )
-from plotting import plot_feature_pairs, plot_classifier_comparison
+from plotting import plot_feature_pairs
 import matplotlib.pyplot as Plot
 import itertools
 import sys
@@ -95,5 +95,4 @@ if __name__ == "__main__":
             print(f"   d = {d}  features {", ".join(str(c + 1) for c in cols):<12} {line}")
         print()
 
-        plot_feature_pairs(ds.X_train, ds.y_train, f"dataset_{k}_train")
-        plot_classifier_comparison(results[k], f"dataset_{k}_classifiers")
+        plot_feature_pairs(np.vstack([ds.X_train, ds.X_test]), np.concatenate([ds.y_train, ds.y_test]), f"dataset_{k}")
