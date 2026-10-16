@@ -8,7 +8,7 @@ from classifiers import (
                         nearest_neighbor, 
                         error_rate
                     )
-from plotting import plot_feature_pairs
+from plotting import plot_feature_pairs, plot_decision_regions
 import matplotlib.pyplot as Plot
 import itertools
 import sys
@@ -96,3 +96,4 @@ if __name__ == "__main__":
         print()
 
         plot_feature_pairs(np.vstack([ds.X_train, ds.X_test]), np.concatenate([ds.y_train, ds.y_test]), f"dataset_{k}")
+        plot_decision_regions(ds, best[2], f"dataset_{k}_regions")
