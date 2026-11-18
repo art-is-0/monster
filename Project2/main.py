@@ -35,7 +35,6 @@ if __name__ == '__main__':
     test_result = minimum_error_predict(params, X_test).reshape(test_img.shape[:2])
     train_result = minimum_error_predict(params, X_out).reshape(train_img.shape[:2])
 
-    print(train_result)
     # result_img = Image.fromarray()
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
     ax1.imshow(train_result, cmap='viridis')

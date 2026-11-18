@@ -10,7 +10,7 @@ def error_rate(y_true, y_pred):
 
 def minimum_error(X_train, y_train):
     params = {}
-    for i in (0, 1):
+    for i in np.unique(y_train):
         # Elements needed to solve for minimum error
         Xi = X_train[y_train == i]
         mu_i = Xi.mean(axis=0)
@@ -27,22 +27,28 @@ def minimum_error(X_train, y_train):
     return params
 
 
-def discriminant(x, W, w, w0):
-    return (x @ W @ x) + (w @ x) + w0
+# def discriminant(x, W, w, w0):
+#     return (x @ W @ x) + (w @ x) + w0
 
+def discriminant(X, W, w, w0):
+    quad = np.einsum('ni,ij,nj->n', X, W, X)  # x^T W x for every row
+    return quad + X @ w + w0
+
+
+# def minimum_error_predict(params, X_test):
+#     y_pred = []
+#     lst = [0]*len(params)
+#     for x in X_test:
+#         for key in params.keys():
+#             lst[key] = discriminant(x, *params[key])
+
+#         y_pred.append(np.argmax(lst))
+#     return np.array(y_pred)
 
 def minimum_error_predict(params, X_test):
-    y_pred = []
-    for x in X_test:
-        g1 = discriminant(x, *params[0])
-        g2 = discriminant(x, *params[1])
-        g = g1 - g2
-
-        if g >= 0:
-            y_pred.append(1)
-        else:
-            y_pred.append(2)
-    return np.array(y_pred)
+    labels = sorted(params)
+    scores = np.stack([discriminant(X_test, *params[k]) for k in labels], axis=1)
+    return np.array(labels)[scores.argmax(axis=1)]
 
 # ------------------------------------------------------------------------------
 

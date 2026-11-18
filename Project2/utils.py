@@ -8,7 +8,8 @@ def load_picture(PATH, normalize=True):
     img = np.array(Image.open(PATH).convert('RGB'))
 
     if normalize:
-        rgb_sum = img.sum(axis=1, keepdims=True)
+        rgb_sum = img.sum(axis=2, keepdims=True)
+        # print(rgb_sum.shape)
         img = img / (rgb_sum + 1e-10)
         img = img[:, :, :2]
 
