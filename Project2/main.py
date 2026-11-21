@@ -114,6 +114,7 @@ if __name__ == '__main__':
 
 
     
+<<<<<<< HEAD
     # fig, ax = plt.subplots(figsize=(6,4))
     # X_train, y_train = extract_features(N_train_img, DATA['regions'])
     # # axes[0].set_ylabel(f'normalized red')
@@ -137,6 +138,31 @@ if __name__ == '__main__':
     #     # ax.set_aspect('equal')
     # plt.tight_layout()
     # plt.savefig(FIGURES_PATH / f'{DATA['name']}_test2.pdf')
+=======
+    fig, ax = plt.subplots(figsize=(6,4))
+    X_train, y_train = extract_features(N_train_img, DATA['regions'])
+    # axes[0].set_ylabel(f'normalized red')
+    X = np.concatenate(N_train_img, axis=0)
+    ax.scatter(X[:, 0], X[:,1], alpha=0.01)
+
+    for idx in range(3):
+        X_k = X_train[y_train == idx]
+
+        ax.scatter(X_k[:, 0], X_k[:, 1], alpha=0.05)
+        ax.scatter(*X_k.mean(axis=0), label=f'mean', s=50, color='black')
+        
+        # for i in [1, 2]:
+        #     ellipse = pc.Ellipse(X_k.mean(axis=0), i*np.sqrt(eigval[1])*2, i*np.sqrt(eigval[0])*2, 
+        #                fc='none', ec='black', ls='--', angle=angle)
+        #     ax.add_patch(ellipse)
+
+        
+        ax.set_xlabel(f'normalized green')
+        ax.set_title(f'class: {idx}')
+        # ax.set_aspect('equal')
+    plt.tight_layout()
+    plt.savefig(FIGURES_PATH / f'{DATA['name']}_test2.pdf')
+>>>>>>> refs/remotes/origin/main
 
 
 
