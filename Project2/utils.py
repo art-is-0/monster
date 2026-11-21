@@ -1,4 +1,3 @@
-from config import ROOT, PICTURE_PATH
 from PIL import Image
 import numpy as np
 from dataclasses import dataclass
